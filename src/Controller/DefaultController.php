@@ -12,4 +12,9 @@ class DefaultController extends AbstractController
     {
         return new Response('Ma première réponse');
     }
+
+    public function exo1(string $name): Response
+    {
+        return new Response('<p>Bonjour '.$name.'!</p>');
+    }
 }

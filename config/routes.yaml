@@ -1,3 +1,7 @@
 index:
     path: /
     controller: App\Controller\DefaultController::index
+
+exo1:
+    path: /demo/{name}
+    controller: App\Controller\DefaultController::exo1
