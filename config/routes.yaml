@@ -6,4 +6,4 @@ exo1:
     path: /demo/{name}
     controller: App\Controller\DefaultController::exo1
     requirements:
-        name: '[A-Z][a-z]{0,8}' # 1 lettre majuscule, puis des lettres minuscules 12 au max, min 0
+        name: '[A-Z][a-z]{0,12}' # 1 lettre majuscule, puis des lettres minuscules 12 au max, min 0
