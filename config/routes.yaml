@@ -9,3 +9,7 @@ exo1:
         name: '[A-Z][a-z]{0,12}' # 1 lettre majuscule, puis des lettres minuscules 12 au max, min 0
     defaults:
         name: 'Everybody'
+
+exo2:
+    path: /http-messages
+    controller: App\Controller\DefaultController::httpMessages
