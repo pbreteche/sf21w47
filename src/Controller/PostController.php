@@ -64,6 +64,7 @@ class PostController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $manager->persist($post);
             $manager->flush();
+            $this->addFlash('notice', 'Votre publication a bien été enregistrée');
 
             return $this->redirectToRoute('app_post_show', ['id' => $post->getId()], Response::HTTP_SEE_OTHER);
         }
