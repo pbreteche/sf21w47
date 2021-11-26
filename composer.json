@@ -1,6 +1,8 @@
 {
+    "name": "pbreteche/sf21w47",
+    "description": "A training project, simulating a blog development.",
     "type": "project",
-    "license": "proprietary",
+    "license": "MIT",
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
