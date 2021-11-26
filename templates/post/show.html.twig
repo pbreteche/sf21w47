@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ post.title }}{% endblock %}
+
+{% block body %}
+<h1>{{ post.title }}</h1>
+<p>Publié le: {{ post.createdAt | date('d/m/Y') }}</p>
+<div class="post-body">
+    {{ post.body | nl2br }}
+</div>
+{% endblock %}

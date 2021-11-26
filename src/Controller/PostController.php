@@ -18,9 +18,21 @@ class PostController extends AbstractController
     {
         $posts = $repository->findBy([], ['createdAt' => 'DESC'], self::MAX_POSTS_PER_PAGE);
 
-        return $this->render('post/index.html.twig', [
+        return $this->render('post/homepage.html.twig', [
             'title' => 'Bienvenue sur mon blog!',
             'posts' => $posts,
+        ]);
+    }
+
+    /**
+     * @Route("/{id}", requirements={"id": "\d+"})
+     */
+    public function show(int $id, PostRepository $repository): Response
+    {
+        $post = $repository->find($id);
+
+        return $this->render('post/show.html.twig', [
+            'post' => $post,
         ]);
     }
 }
