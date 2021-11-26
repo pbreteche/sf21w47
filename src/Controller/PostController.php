@@ -56,10 +56,6 @@ class PostController extends AbstractController
                 'attr' => [ 'cols' => 60, 'rows' => 10 ],
                 'help' => 'Écrivez un contenu suffisamment long (10).',
             ])
-            ->add('createdAt', DateTimeType::class, [
-                'widget' => 'single_text',
-                'input' => 'datetime_immutable',
-            ])
             ->getForm()
         ;
 
