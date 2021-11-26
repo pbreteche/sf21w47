@@ -7,7 +7,7 @@
     <p>Il y a {{ posts | length }} article(s) :</p>
     <ul>
         {% for post in posts %}
-        <li>{{ post.title }}</li>
+        <li>{{ post.createdAt | date('d/m/Y') }} - {{ post.title }}</li>
         {% endfor %}
     </ul>
 {% endblock %}
