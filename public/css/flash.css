@@ -1,0 +1,11 @@
+.flash {
+    border: 1px solid;
+    border-radius: .125em;
+    padding: .25em;
+}
+
+.flash-notice {
+    border-color: #22a;
+    color: #229;
+    background-color: #ccF;
+}
