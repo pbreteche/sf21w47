@@ -8,6 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -48,9 +49,12 @@ class PostController extends AbstractController
     {
         $post = new Post();
         $form = $this->createFormBuilder($post)
-            ->add('title')
+            ->add('title', TextType::class, [
+                'help' => 'Pas plus long que 60 caractères',
+            ])
             ->add('body', TextareaType::class, [
                 'attr' => [ 'cols' => 60, 'rows' => 10 ],
+                'help' => 'Écrivez un contenu suffisamment long (10).',
             ])
             ->add('createdAt', DateTimeType::class, [
                 'widget' => 'single_text',
