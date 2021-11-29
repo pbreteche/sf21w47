@@ -36,6 +36,10 @@ class PostController extends AbstractController
     {
         $post = $repository->find($id);
 
+        if (!$post) {
+            throw $this->createNotFoundException();
+        }
+
         return $this->render('post/show.html.twig', [
             'post' => $post,
         ]);
@@ -79,6 +83,11 @@ class PostController extends AbstractController
     public function edit(int $id, Request $request, PostRepository $repository, EntityManagerInterface $manager): Response
     {
         $post = $repository->find($id);
+
+        if (!$post) {
+            throw $this->createNotFoundException();
+        }
+
         $form = $this->createFormBuilder($post)
             ->add('title', TextType::class, [
                 'help' => 'Pas plus long que 60 caractères',
