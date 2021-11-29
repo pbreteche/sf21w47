@@ -32,14 +32,8 @@ class PostController extends AbstractController
     /**
      * @Route("/{id}", requirements={"id": "\d+"})
      */
-    public function show(int $id, PostRepository $repository): Response
+    public function show(Post $post): Response
     {
-        $post = $repository->find($id);
-
-        if (!$post) {
-            throw $this->createNotFoundException();
-        }
-
         return $this->render('post/show.html.twig', [
             'post' => $post,
         ]);
@@ -80,14 +74,8 @@ class PostController extends AbstractController
     /**
      * @Route("/{id}/edit")
      */
-    public function edit(int $id, Request $request, PostRepository $repository, EntityManagerInterface $manager): Response
+    public function edit(Post $post, Request $request, EntityManagerInterface $manager): Response
     {
-        $post = $repository->find($id);
-
-        if (!$post) {
-            throw $this->createNotFoundException();
-        }
-
         $form = $this->createFormBuilder($post)
             ->add('title', TextType::class, [
                 'help' => 'Pas plus long que 60 caractères',
