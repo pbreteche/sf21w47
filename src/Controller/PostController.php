@@ -16,7 +16,7 @@ class PostController extends AbstractController
     const MAX_POSTS_PER_PAGE = 10;
 
     /**
-     * @Route("/")
+     * @Route("/", methods="GET")
      */
     public function homepage(PostRepository $repository): Response
     {
@@ -29,7 +29,7 @@ class PostController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", requirements={"id": "\d+"})
+     * @Route("/{id}", requirements={"id": "\d+"}, methods="GET")
      */
     public function show(Post $post): Response
     {
@@ -39,7 +39,7 @@ class PostController extends AbstractController
     }
 
     /**
-     * @Route("/new")
+     * @Route("/new", methods={"GET", "POST"})
      */
     public function create(Request $request, EntityManagerInterface $manager): Response
     {
@@ -61,11 +61,13 @@ class PostController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit")
+     * @Route("/{id}/edit", methods={"GET", "PUT"})
      */
     public function edit(Post $post, Request $request, EntityManagerInterface $manager): Response
     {
-        $form = $this->createForm(PostType::class, $post);
+        $form = $this->createForm(PostType::class, $post, [
+            'method' => 'PUT',
+        ]);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
