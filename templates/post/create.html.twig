@@ -3,8 +3,5 @@
 {% block title %}Rédaction d'une publi{% endblock %}
 
 {% block body %}
-    {{ form_start(create_form) }}
-    {{ form_widget(create_form) }}
-    <button>Publier</button>
-    {{ form_end(create_form) }}
+    {{ include('post/_form.html.twig', {form: create_form, button_text: 'Publier'}) }}
 {% endblock %}

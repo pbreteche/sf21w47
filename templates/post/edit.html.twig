@@ -3,8 +3,5 @@
 {% block title %}Édition d'une publi{% endblock %}
 
 {% block body %}
-    {{ form_start(edit_form) }}
-    {{ form_widget(edit_form) }}
-    <button>Modifier</button>
-    {{ form_end(edit_form) }}
+    {{ include('post/_form.html.twig', {form: edit_form, button_text: 'Modifier'}) }}
 {% endblock %}
