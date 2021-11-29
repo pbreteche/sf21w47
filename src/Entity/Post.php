@@ -38,6 +38,11 @@ class Post
      */
     private $createdAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Author::class)
+     */
+    private $writtenBy;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -70,6 +75,18 @@ class Post
     public function getCreatedAt(): ?\DateTimeImmutable
     {
         return $this->createdAt;
+    }
+
+    public function getWrittenBy(): ?Author
+    {
+        return $this->writtenBy;
+    }
+
+    public function setWrittenBy(?Author $writtenBy): self
+    {
+        $this->writtenBy = $writtenBy;
+
+        return $this;
     }
 
     /**
