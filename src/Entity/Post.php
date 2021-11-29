@@ -39,7 +39,7 @@ class Post
     private $createdAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Author::class)
+     * @ORM\ManyToOne(targetEntity=Author::class, fetch="EAGER")
      * @ORM\JoinColumn(nullable=false)
      * @Assert\NotNull()
      */
