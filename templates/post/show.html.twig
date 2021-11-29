@@ -4,7 +4,7 @@
 
 {% block body %}
 <h1>{{ post.title }}</h1>
-<p>Publié le: {{ post.createdAt | date('d/m/Y') }}</p>
+<p>Publié le: {{ post.createdAt | date('d/m/Y') }}, par {{ post.writtenBy.name }}</p>
 <div class="post-body">
     {{ post.body | nl2br }}
 </div>
