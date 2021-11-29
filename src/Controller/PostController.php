@@ -7,9 +7,11 @@ use App\Form\PostType;
 use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\EqualTo;
 
 class PostController extends AbstractController
 {
@@ -89,7 +91,15 @@ class PostController extends AbstractController
     {
         $form = $this->createFormBuilder(null, [
             'method' => 'DELETE',
-        ])->getForm();
+        ])
+            ->add('challenge', TextType::class, [
+                'label' => false,
+                'help' => 'Veuillez recopier le titre de la publi: <kbd>'.htmlspecialchars($post->getTitle()).'</kbd>',
+                'help_html' => true,
+                'constraints' => new EqualTo(['value' => $post->getTitle()]),
+            ])
+            ->getForm()
+        ;
 
         $form->handleRequest($request);
 
