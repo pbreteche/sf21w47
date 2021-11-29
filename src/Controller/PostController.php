@@ -3,11 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Post;
+use App\Form\PostType;
 use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -45,17 +44,7 @@ class PostController extends AbstractController
     public function create(Request $request, EntityManagerInterface $manager): Response
     {
         $post = new Post();
-        $form = $this->createFormBuilder($post)
-            ->add('title', TextType::class, [
-                'help' => 'Pas plus long que 60 caractères',
-            ])
-            ->add('body', TextareaType::class, [
-                'attr' => [ 'cols' => 60, 'rows' => 10 ],
-                'help' => 'Écrivez un contenu suffisamment long (10).',
-            ])
-            ->getForm()
-        ;
-
+        $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -76,17 +65,7 @@ class PostController extends AbstractController
      */
     public function edit(Post $post, Request $request, EntityManagerInterface $manager): Response
     {
-        $form = $this->createFormBuilder($post)
-            ->add('title', TextType::class, [
-                'help' => 'Pas plus long que 60 caractères',
-            ])
-            ->add('body', TextareaType::class, [
-                'attr' => [ 'cols' => 60, 'rows' => 10 ],
-                'help' => 'Écrivez un contenu suffisamment long (10).',
-            ])
-            ->getForm()
-        ;
-
+        $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
