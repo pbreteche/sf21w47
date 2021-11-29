@@ -81,4 +81,29 @@ class PostController extends AbstractController
             'edit_form' => $form,
         ]);
     }
+
+    /**
+     * @Route("/{id}/delete", methods={"GET", "DELETE"})
+     */
+    public function delete(Post $post, Request $request, EntityManagerInterface $manager): Response
+    {
+        $form = $this->createFormBuilder(null, [
+            'method' => 'DELETE',
+        ])->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->remove($post);
+            $manager->flush();
+            $this->addFlash('notice', 'Votre publication a bien été supprimée');
+
+            return $this->redirectToRoute('app_post_homepage', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('post/delete.html.twig', [
+            'delete_form' => $form,
+            'post' => $post,
+        ]);
+    }
 }

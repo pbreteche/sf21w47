@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Suppression de l'article {{ post.id }}{% endblock %}
+
+{% block body %}
+<h1>Suppression de «{{ post.title }}»</h1>
+{{ form_start(delete_form) }}
+{{ form_widget(delete_form) }}
+<button>Supprimer</button>
+{{ form_end(delete_form) }}
+<p><a href="{{ path('app_post_show', {id: post.id}) }}">Retour</a></p>
+{% endblock %}
