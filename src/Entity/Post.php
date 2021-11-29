@@ -40,6 +40,8 @@ class Post
 
     /**
      * @ORM\ManyToOne(targetEntity=Author::class)
+     * @ORM\JoinColumn(nullable=false)
+     * @Assert\NotNull()
      */
     private $writtenBy;
 
