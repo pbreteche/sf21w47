@@ -73,6 +73,7 @@ class PostController extends AbstractController
 
     /**
      * @Route("/{id}/edit", methods={"GET", "PUT"})
+     * @IsGranted("POST_EDIT", subject="post")
      */
     public function edit(Post $post, Request $request, EntityManagerInterface $manager): Response
     {
