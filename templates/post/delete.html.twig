@@ -8,5 +8,5 @@
 {{ form_widget(delete_form) }}
 <button>Supprimer</button>
 {{ form_end(delete_form) }}
-<p><a href="{{ path('app_post_show', {id: post.id}) }}">Retour</a></p>
+<p><a href="{{ path('app_frontoffice_default_show', {id: post.id}) }}">Retour</a></p>
 {% endblock %}

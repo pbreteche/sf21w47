@@ -29,7 +29,7 @@ class AuthorController extends AbstractController
             $manager->flush();
 
             $this->addFlash('notice', 'Le compte '.$author->getName().' a bien été créé');
-            return $this->redirectToRoute('app_post_homepage');
+            return $this->redirectToRoute('app_frontoffice_default_homepage');
         }
 
         return $this->renderForm('author/subscribe.html.twig', [

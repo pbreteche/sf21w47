@@ -8,7 +8,7 @@
     <p><a href="{{ path('app_post_create') }}">Nouveau</a></p>
     <ul>
         {% for post in posts %}
-        <li>{{ post.createdAt | date('d/m/Y') }} - <a href="{{ path('app_post_show', {id: post.id}) }}">{{ post.title }}</a></li>
+        <li>{{ post.createdAt | date('d/m/Y') }} - <a href="{{ path('app_frontoffice_default_show', {id: post.id}) }}">{{ post.title }}</a></li>
         {% endfor %}
     </ul>
 {% endblock %}
