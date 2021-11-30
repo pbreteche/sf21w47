@@ -20,6 +20,11 @@
         {% endblock %}
     </head>
     <body>
+    {% if app.user %}
+        <div>
+            Vous êtes connecté·e en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_security_logout') }}">Logout</a>
+        </div>
+    {% endif %}
         {# read and display all flash messages #}
         {% for label, messages in app.flashes %}
             {% for message in messages %}
