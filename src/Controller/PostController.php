@@ -7,6 +7,7 @@ use App\Form\PostType;
 use App\Repository\PostRepository;
 use App\Security\AuthorSecurity;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
@@ -43,6 +44,7 @@ class PostController extends AbstractController
 
     /**
      * @Route("/new", methods={"GET", "POST"})
+     * @IsGranted("ROLE_AUTHOR")
      */
     public function create(
         Request $request,
