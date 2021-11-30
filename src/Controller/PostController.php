@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Post;
 use App\Form\PostType;
+use App\Repository\AuthorRepository;
 use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -11,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Validator\Constraints\EqualTo;
 
 class PostController extends AbstractController
@@ -43,9 +45,17 @@ class PostController extends AbstractController
     /**
      * @Route("/new", methods={"GET", "POST"})
      */
-    public function create(Request $request, EntityManagerInterface $manager): Response
+    public function create(Request $request, AuthorRepository $authorRepository, EntityManagerInterface $manager): Response
     {
-        $post = new Post();
+        $author = null;
+        if ($user = $this->getUser()) {
+            $author = $authorRepository->findOneBy(['authenticatedAs' => $user]);
+        }
+
+        $post = (new Post())
+            ->setWrittenBy($author)
+        ;
+
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 
