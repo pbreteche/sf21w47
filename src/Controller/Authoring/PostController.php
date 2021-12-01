@@ -17,7 +17,6 @@ use Symfony\Component\Validator\Constraints\EqualTo;
 
 /**
  * @Route("/authoring")
- * @IsGranted("ROLE_AUTHOR")
  */
 class PostController extends AbstractController
 {
