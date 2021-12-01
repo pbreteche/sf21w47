@@ -4,6 +4,7 @@ namespace App\Controller\Authoring;
 
 use App\Entity\Post;
 use App\Form\PostType;
+use App\Repository\PostRepository;
 use App\Security\AuthorSecurity;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -16,12 +17,24 @@ use Symfony\Component\Validator\Constraints\EqualTo;
 
 /**
  * @Route("/authoring")
+ * @IsGranted("ROLE_AUTHOR")
  */
 class PostController extends AbstractController
 {
     /**
+     * @Route("", methods="GET")
+     */
+    public function index(PostRepository $repository): Response
+    {
+        $posts = $repository->findBy([], ['createdAt' => 'DESC']);
+
+        return $this->render('authoring/post/index.html.twig', [
+            'posts' => $posts,
+        ]);
+    }
+
+    /**
      * @Route("/new", methods={"GET", "POST"})
-     * @IsGranted("ROLE_AUTHOR")
      */
     public function create(
         Request $request,
@@ -43,7 +56,7 @@ class PostController extends AbstractController
             return $this->redirectToRoute('app_frontoffice_default_show', ['id' => $post->getId()], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('post/create.html.twig', [
+        return $this->renderForm('authoring/post/create.html.twig', [
             'create_form' => $form,
         ]);
     }
@@ -66,7 +79,7 @@ class PostController extends AbstractController
             return $this->redirectToRoute('app_frontoffice_default_show', ['id' => $post->getId()], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('post/edit.html.twig', [
+        return $this->renderForm('authoring/post/edit.html.twig', [
             'edit_form' => $form,
         ]);
     }
@@ -98,7 +111,7 @@ class PostController extends AbstractController
             return $this->redirectToRoute('app_frontoffice_default_homepage', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('post/delete.html.twig', [
+        return $this->renderForm('authoring/post/delete.html.twig', [
             'delete_form' => $form,
             'post' => $post,
         ]);

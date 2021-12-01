@@ -3,5 +3,5 @@
 {% block title %}Rédaction d'une publi{% endblock %}
 
 {% block body %}
-    {{ include('post/_form.html.twig', {form: create_form, button_text: 'Publier'}) }}
+    {{ include('authoring/post/_form.html.twig', {form: create_form, button_text: 'Publier'}) }}
 {% endblock %}
