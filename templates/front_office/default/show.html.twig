@@ -9,8 +9,6 @@
     {{ post.body | nl2br }}
 </div>
 <p>
-    <a href="{{ path('app_post_homepage') }}">Retour à l'accueil</a>
-    <a href="{{ path('app_post_edit', {id: post.id}) }}">Éditer</a>
-    <a href="{{ path('app_post_delete', {id: post.id}) }}">Supprimer</a>
+    <a href="{{ path('app_frontoffice_default_homepage') }}">Retour à l'accueil</a>
 </p>
 {% endblock %}

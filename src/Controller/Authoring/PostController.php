@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Authoring;
 
 use App\Entity\Post;
 use App\Form\PostType;
 use App\Repository\PostRepository;
 use App\Security\AuthorSecurity;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,30 +15,21 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\EqualTo;
 
+/**
+ * @Route("/authoring")
+ * @IsGranted("ROLE_AUTHOR")
+ */
 class PostController extends AbstractController
 {
-    const MAX_POSTS_PER_PAGE = 10;
-
     /**
-     * @Route("/", methods="GET")
+     * @Route("", methods="GET")
      */
-    public function homepage(PostRepository $repository): Response
+    public function index(PostRepository $repository): Response
     {
-        $posts = $repository->findBy([], ['createdAt' => 'DESC'], self::MAX_POSTS_PER_PAGE);
+        $posts = $repository->findBy([], ['createdAt' => 'DESC']);
 
-        return $this->render('post/homepage.html.twig', [
-            'title' => 'Bienvenue sur mon blog!',
+        return $this->render('authoring/post/index.html.twig', [
             'posts' => $posts,
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", requirements={"id": "\d+"}, methods="GET")
-     */
-    public function show(Post $post): Response
-    {
-        return $this->render('post/show.html.twig', [
-            'post' => $post,
         ]);
     }
 
@@ -61,16 +53,17 @@ class PostController extends AbstractController
             $manager->flush();
             $this->addFlash('notice', 'Votre publication a bien été enregistrée');
 
-            return $this->redirectToRoute('app_post_show', ['id' => $post->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_frontoffice_default_show', ['id' => $post->getId()], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('post/create.html.twig', [
+        return $this->renderForm('authoring/post/create.html.twig', [
             'create_form' => $form,
         ]);
     }
 
     /**
      * @Route("/{id}/edit", methods={"GET", "PUT"})
+     * @IsGranted("POST_EDIT", subject="post")
      */
     public function edit(Post $post, Request $request, EntityManagerInterface $manager): Response
     {
@@ -83,10 +76,10 @@ class PostController extends AbstractController
             $manager->flush();
             $this->addFlash('notice', 'Votre publication a bien été modifiée');
 
-            return $this->redirectToRoute('app_post_show', ['id' => $post->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_frontoffice_default_show', ['id' => $post->getId()], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('post/edit.html.twig', [
+        return $this->renderForm('authoring/post/edit.html.twig', [
             'edit_form' => $form,
         ]);
     }
@@ -115,10 +108,10 @@ class PostController extends AbstractController
             $manager->flush();
             $this->addFlash('notice', 'Votre publication a bien été supprimée');
 
-            return $this->redirectToRoute('app_post_homepage', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_frontoffice_default_homepage', [], Response::HTTP_SEE_OTHER);
         }
 
-        return $this->renderForm('post/delete.html.twig', [
+        return $this->renderForm('authoring/post/delete.html.twig', [
             'delete_form' => $form,
             'post' => $post,
         ]);

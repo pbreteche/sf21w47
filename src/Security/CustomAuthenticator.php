@@ -50,7 +50,7 @@ class CustomAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('app_post_homepage'));
+        return new RedirectResponse($this->urlGenerator->generate('app_frontoffice_default_homepage'));
     }
 
     protected function getLoginUrl(Request $request): string
