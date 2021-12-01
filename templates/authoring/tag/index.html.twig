@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon blog{% endblock %}
+
+{% block body %}
+    <h1>Gestion des tags</h1>
+    <p>Il y a {{ tags | length }} tag(s) :</p>
+
+    <table>
+        <thead>
+            <tr><th>id</th><th>Libellé</th><th>Couleur</th><th>Actions</th></tr>
+        </thead>
+        <tbody>
+        {% for tag in tags %}
+            <tr>
+                <td>{{ tag.id }}</td>
+                <td>{{ tag.label }}</td>
+                <td style="background: {{ tag.color }}; color: #eee">{{ tag.color }}</td>
+                <td>- -</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
