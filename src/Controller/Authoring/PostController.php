@@ -37,11 +37,10 @@ class PostController extends AbstractController
      */
     public function create(
         Request $request,
-        EntityManagerInterface $manager,
-        AuthorSecurity $authorSecurity
+        EntityManagerInterface $manager
     ): Response {
         $post = (new Post())
-            ->setWrittenBy($authorSecurity->getAuthor())
+            ->setWrittenBy($this->getUser())
         ;
 
         $form = $this->createForm(PostType::class, $post);
