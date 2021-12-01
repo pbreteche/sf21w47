@@ -2,6 +2,11 @@ controllers:
     resource: ../../src/Controller/
     type: annotation
 
+authoring_controllers:
+    resource: ../../src/Controller/Authoring
+    type: annotation
+    prefix: /authoring
+
 kernel:
     resource: ../../src/Kernel.php
     type: annotation

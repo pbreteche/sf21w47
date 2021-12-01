@@ -16,7 +16,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\EqualTo;
 
 /**
- * @Route("/authoring")
+ * @Route("")
  */
 class PostController extends AbstractController
 {
