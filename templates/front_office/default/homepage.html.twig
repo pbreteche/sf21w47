@@ -5,7 +5,7 @@
 {% block body %}
     <h1>{{ title }}</h1>
     <p>Il y a {{ posts | length }} article(s) :</p>
-    <p><a href="{{ path('app_post_create') }}">Nouveau</a></p>
+    <p><a href="{{ path('app_authoring_post_create') }}">Nouveau</a></p>
     <ul>
         {% for post in posts %}
         <li>{{ post.createdAt | date('d/m/Y') }} - <a href="{{ path('app_frontoffice_default_show', {id: post.id}) }}">{{ post.title }}</a></li>

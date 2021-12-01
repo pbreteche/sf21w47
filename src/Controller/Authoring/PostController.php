@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Authoring;
 
 use App\Entity\Post;
 use App\Form\PostType;
@@ -14,6 +14,9 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\EqualTo;
 
+/**
+ * @Route("/authoring")
+ */
 class PostController extends AbstractController
 {
     /**
