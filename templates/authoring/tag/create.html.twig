@@ -1,0 +1,7 @@
+{% extends 'authoring/layout.html.twig' %}
+
+{% block title %}Création d'un tag{% endblock %}
+
+{% block content %}
+    {{ include('authoring/_form.html.twig', {form: create_form, button_text: 'Créer'}) }}
+{% endblock %}
