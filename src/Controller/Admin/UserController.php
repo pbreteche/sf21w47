@@ -34,7 +34,7 @@ class UserController extends AbstractController
             return $this->redirectToRoute('app_frontoffice_default_homepage');
         }
 
-        return $this->renderForm('author/subscribe.html.twig', [
+        return $this->renderForm('admin/user/subscribe.html.twig', [
             'form' => $form,
         ]);
     }
