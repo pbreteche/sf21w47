@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <header>
+        <nav>
+            <a href="{{ path('app_frontoffice_default_homepage') }}">Accueil</a>
+            {% if is_granted('ROLE_AUTHOR') %}
+            <a href="{{ path('app_authoring_post_create') }}">Écrire</a>
+            {% endif %}
+            <a href="{{ path('app_security_login') }}">Se connecter</a>
+        </nav>
+    </header>
+
+    {% block content %}{% endblock %}
+    <footer>
+        <a href="#">Politique de confidentialité</a>
+        <a href="#">Vos données privées</a>
+        <a href="#">Nos logiciels espions</a>
+    </footer>
+{% endblock %}
