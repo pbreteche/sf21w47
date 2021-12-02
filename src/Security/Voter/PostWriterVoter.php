@@ -3,21 +3,12 @@
 namespace App\Security\Voter;
 
 use App\Entity\Post;
-use App\Security\AuthorSecurity;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 class PostWriterVoter extends Voter
 {
-    /** @var AuthorSecurity */
-    private $authorSecurity;
-
-    public function __construct(AuthorSecurity $authorSecurity)
-    {
-        $this->authorSecurity = $authorSecurity;
-    }
-
     protected function supports(string $attribute, $subject): bool
     {
         return in_array($attribute, ['POST_EDIT', 'POST_DELETE'])
@@ -38,7 +29,7 @@ class PostWriterVoter extends Voter
         switch ($attribute) {
             case 'POST_EDIT':
             case 'POST_DELETE':
-                return $subject->getWrittenBy() === $this->authorSecurity->getAuthor();
+                return $subject->getWrittenBy() === $user;
         }
 
         return false;
