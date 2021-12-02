@@ -1,7 +1,7 @@
-{% extends 'base.html.twig' %}
+{% extends 'authoring/layout.html.twig' %}
 
 {% block title %}Édition d'une publi{% endblock %}
 
-{% block body %}
+{% block content %}
     {{ include('authoring/post/_form.html.twig', {form: edit_form, button_text: 'Modifier'}) }}
 {% endblock %}

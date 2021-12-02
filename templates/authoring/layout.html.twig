@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <header>
+        <nav>
+            <a href="{{ path('app_frontoffice_default_homepage') }}">Pages publiques</a>
+            <a href="{{ path('app_authoring_post_index') }}">Publications</a>
+            <a href="{{ path('app_authoring_post_create') }}">Écrire</a>
+            <a href="{{ path('app_authoring_tag_index') }}">Tags</a>
+        </nav>
+    </header>
+
+    {% block content %}{% endblock %}
+    <footer>
+        <a href="#">Politique de confidentialité</a>
+        <a href="#">Vos données privées</a>
+        <a href="#">Nos logiciels espions</a>
+    </footer>
+{% endblock %}
