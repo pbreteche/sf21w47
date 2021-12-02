@@ -17,7 +17,10 @@
                 <td>{{ tag.id }}</td>
                 <td>{{ tag.label }}</td>
                 <td style="background: {{ tag.color }}; color: #eee">{{ tag.color }}</td>
-                <td><a href="{{ path('app_authoring_tag_edit', {id: tag.id}) }}">Éditer</a> -</td>
+                <td>
+                    <a href="{{ path('app_authoring_tag_edit', {id: tag.id}) }}">Éditer</a>
+                    <a href="{{ path('app_authoring_tag_delete', {id: tag.id}) }}">Supprimer</a>
+                </td>
             </tr>
         {% endfor %}
         </tbody>

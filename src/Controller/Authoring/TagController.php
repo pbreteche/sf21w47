@@ -4,6 +4,7 @@ namespace App\Controller\Authoring;
 
 use App\Entity\Tag;
 use App\Form\TagType;
+use App\Repository\PostRepository;
 use App\Repository\TagRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -73,6 +74,39 @@ class TagController extends AbstractController
 
         return $this->renderForm('authoring/tag/edit.html.twig', [
             'edit_form' => $form,
+        ]);
+    }
+    /**
+     * @Route("/{id}/delete", methods={"GET", "DELETE"})
+     */
+    public function delete(
+        Tag $tag,
+        Request $request,
+        EntityManagerInterface $manager,
+        PostRepository $postRepository
+    ): Response {
+        $postCount = $postRepository->countByTag($tag);
+
+        $form = $this->createFormBuilder(null, [
+            'method' => 'DELETE',
+            'help' => $postCount.' publis utilisent actuellement ce tag. Êtes-vous sûr ?',
+        ])
+            ->getForm()
+        ;
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->remove($tag);
+            $manager->flush();
+            $this->addFlash('notice', 'Votre tag a bien été supprimé');
+
+            return $this->redirectToRoute('app_authoring_tag_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('authoring/tag/delete.html.twig', [
+            'delete_form' => $form,
+            'tag' => $tag,
         ]);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Post;
+use App\Entity\Tag;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -17,6 +18,33 @@ class PostRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Post::class);
+    }
+
+    public function countByTag(Tag $tag): int
+    {
+        return $this
+            ->getEntityManager()
+            ->createQuery(
+                'SELECT COUNT(post) FROM '.Post::class.' post '.
+                'INNER JOIN post.taggedBy tags '.
+                'WHERE tags = :tag'
+            )
+            ->setParameter('tag', $tag)
+            ->getSingleScalarResult()
+        ;
+    }
+
+    public function countByTagWithBuilder(Tag $tag): int
+    {
+        return $this
+            ->createQueryBuilder('post')
+            ->select('COUNT(post)')
+            ->innerJoin('post.taggedBy', 'tags')
+            ->andWhere('tags = :tag')
+            ->getQuery()
+            ->setParameter('tag', $tag)
+            ->getSingleScalarResult()
+        ;
     }
 
     // /**

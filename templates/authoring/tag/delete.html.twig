@@ -1,0 +1,13 @@
+{% extends 'authoring/layout.html.twig' %}
+
+{% block title %}Suppression du tag {{ tag.id }}{% endblock %}
+
+{% block content %}
+<h1>Suppression de «{{ tag.label }}»</h1>
+{{ form_start(delete_form) }}
+{{ form_help(delete_form) }}
+{{ form_widget(delete_form) }}
+<button>Supprimer</button>
+{{ form_end(delete_form) }}
+<p><a href="{{ path('app_authoring_tag_index', {id: tag.id}) }}">Retour</a></p>
+{% endblock %}
