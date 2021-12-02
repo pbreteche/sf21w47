@@ -52,4 +52,27 @@ class TagController extends AbstractController
             'create_form' => $form,
         ]);
     }
+
+
+    /**
+     * @Route("/{id}/edit", methods={"GET", "PUT"})
+     */
+    public function edit(Tag $tag, Request $request, EntityManagerInterface $manager): Response
+    {
+        $form = $this->createForm(TagType::class, $tag, [
+            'method' => 'PUT',
+        ]);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $manager->flush();
+            $this->addFlash('notice', 'Votre tag a bien été modifié');
+
+            return $this->redirectToRoute('app_authoring_tag_index', [], Response::HTTP_SEE_OTHER);
+        }
+
+        return $this->renderForm('authoring/tag/edit.html.twig', [
+            'edit_form' => $form,
+        ]);
+    }
 }

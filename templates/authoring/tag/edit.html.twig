@@ -1,0 +1,7 @@
+{% extends 'authoring/layout.html.twig' %}
+
+{% block title %}Édition d'un tag{% endblock %}
+
+{% block content %}
+    {{ include('authoring/_form.html.twig', {form: edit_form, button_text: 'Modifier'}) }}
+{% endblock %}

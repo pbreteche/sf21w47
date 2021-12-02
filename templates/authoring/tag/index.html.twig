@@ -5,6 +5,7 @@
 {% block content %}
     <h1>Gestion des tags</h1>
     <p>Il y a {{ tags | length }} tag(s) :</p>
+    <p><a href="{{ path('app_authoring_tag_create') }}">Nouveau</a></p>
 
     <table>
         <thead>
@@ -16,7 +17,7 @@
                 <td>{{ tag.id }}</td>
                 <td>{{ tag.label }}</td>
                 <td style="background: {{ tag.color }}; color: #eee">{{ tag.color }}</td>
-                <td>- -</td>
+                <td><a href="{{ path('app_authoring_tag_edit', {id: tag.id}) }}">Éditer</a> -</td>
             </tr>
         {% endfor %}
         </tbody>
