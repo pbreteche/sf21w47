@@ -9,6 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Knp\DoctrineBehaviors\Contract\Entity\SluggableInterface;
 use Knp\DoctrineBehaviors\Model\Sluggable\SluggableTrait;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Serializer\Annotation\Groups;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
@@ -30,6 +31,7 @@ class Post implements SluggableInterface
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Groups("api")
      * @Assert\NotBlank
      * @Assert\Length(max=60)
      */
@@ -58,6 +60,7 @@ class Post implements SluggableInterface
 
     /**
      * @ORM\Column(type="datetime_immutable")
+     * @Groups("api")
      */
     private $createdAt;
 
