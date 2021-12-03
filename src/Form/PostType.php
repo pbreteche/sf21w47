@@ -32,6 +32,9 @@ class PostType extends AbstractType
                 'choice_label' => 'label',
                 'multiple' => true,
                 'expanded' => true,
+                'choice_attr' =>  function($choice, $key, $value) {
+                    return ['data-color' => $choice->getColor()];
+                },
             ])
         ;
     }

@@ -7,3 +7,22 @@
 .vich-image img {
     max-height: 2em;
 }
+
+#post_taggedBy input[type=checkbox] {
+    display: none;
+}
+
+#post_taggedBy input[type=checkbox] + label {
+    display: inline-block;
+    padding: .5em 1em;
+    border: 1px solid #112233;
+    border-radius: .25em;
+    color: #112233;
+    background-color: #ffeedd;
+}
+
+#post_taggedBy input[type=checkbox]:checked + label {
+    border-color: #ffeedd;
+    color: #ffeedd;
+    background-color: #112233;
+}
