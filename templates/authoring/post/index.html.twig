@@ -14,7 +14,7 @@
         <tbody>
         {% for post in posts %}
             <tr>
-                <td><a href="{{ path('app_frontoffice_default_show', {id: post.id}) }}" target="_blank">{{ post.id }}</a></td>
+                <td><a href="{{ path('app_frontoffice_default_show', {slug: post.slug}) }}" target="_blank">{{ post.id }}</a></td>
                 <td>{{ post.title }}</td>
                 <td>{{ post.writtenBy.name }}</td>
                 <td>{{ post.createdAt | date('d/m/Y') }}</td>

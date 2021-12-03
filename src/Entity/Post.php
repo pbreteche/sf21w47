@@ -6,6 +6,8 @@ use App\Repository\PostRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Knp\DoctrineBehaviors\Contract\Entity\SluggableInterface;
+use Knp\DoctrineBehaviors\Model\Sluggable\SluggableTrait;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -15,8 +17,10 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @ORM\HasLifecycleCallbacks
  * @Vich\Uploadable
  */
-class Post
+class Post implements SluggableInterface
 {
+    use SluggableTrait;
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -183,5 +187,10 @@ class Post
         if (!$this->createdAt) {
             $this->createdAt = new \DateTimeImmutable();
         }
+    }
+
+    public function getSluggableFields(): array
+    {
+        return ['title'];
     }
 }

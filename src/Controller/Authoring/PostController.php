@@ -5,7 +5,6 @@ namespace App\Controller\Authoring;
 use App\Entity\Post;
 use App\Form\PostType;
 use App\Repository\PostRepository;
-use App\Security\AuthorSecurity;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -51,7 +50,7 @@ class PostController extends AbstractController
             $manager->flush();
             $this->addFlash('notice', 'Votre publication a bien été enregistrée');
 
-            return $this->redirectToRoute('app_frontoffice_default_show', ['id' => $post->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_authoring_post_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('authoring/post/create.html.twig', [
@@ -74,7 +73,7 @@ class PostController extends AbstractController
             $manager->flush();
             $this->addFlash('notice', 'Votre publication a bien été modifiée');
 
-            return $this->redirectToRoute('app_frontoffice_default_show', ['id' => $post->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_authoring_post_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('authoring/post/edit.html.twig', [
@@ -106,7 +105,7 @@ class PostController extends AbstractController
             $manager->flush();
             $this->addFlash('notice', 'Votre publication a bien été supprimée');
 
-            return $this->redirectToRoute('app_frontoffice_default_homepage', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('app_authoring_post_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('authoring/post/delete.html.twig', [

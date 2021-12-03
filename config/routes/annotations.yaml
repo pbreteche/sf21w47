@@ -1,11 +1,21 @@
-controllers:
-    resource: ../../src/Controller/
+other_controllers:
+    resource: ../../src/Controller
     type: annotation
+
+front_office_controllers:
+    resource: ../../src/Controller/FrontOffice
+    type: annotation
+    prefix: /blog
 
 authoring_controllers:
     resource: ../../src/Controller/Authoring
     type: annotation
     prefix: /authoring
+
+admin_controllers:
+    resource: ../../src/Controller/Admin
+    type: annotation
+    prefix: /admin
 
 kernel:
     resource: ../../src/Kernel.php

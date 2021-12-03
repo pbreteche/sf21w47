@@ -26,7 +26,7 @@ class DefaultController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", requirements={"id": "\d+"}, methods="GET")
+     * @Route("/{slug}", methods="GET")
      */
     public function show(Post $post): Response
     {

@@ -7,7 +7,7 @@
     <p>Il y a {{ posts | length }} article(s) :</p>
     <ul>
         {% for post in posts %}
-        <li>{{ post.createdAt | date('d/m/Y') }} - <a href="{{ path('app_frontoffice_default_show', {id: post.id}) }}">{{ post.title }}</a></li>
+        <li>{{ post.createdAt | date('d/m/Y') }} - <a href="{{ path('app_frontoffice_default_show', {slug: post.slug}) }}">{{ post.title }}</a></li>
         {% endfor %}
     </ul>
 {% endblock %}
