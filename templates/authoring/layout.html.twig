@@ -11,9 +11,5 @@
     </header>
 
     {% block content %}{% endblock %}
-    <footer>
-        <a href="#">Politique de confidentialité</a>
-        <a href="#">Vos données privées</a>
-        <a href="#">Nos logiciels espions</a>
-    </footer>
+    {{ include('_footer.html.twig') }}
 {% endblock %}

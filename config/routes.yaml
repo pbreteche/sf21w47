@@ -4,3 +4,10 @@ homepage:
     defaults:
         route: app_frontoffice_default_homepage
         permanent: true
+
+privacy:
+    path:          /privacy
+    controller:    Symfony\Bundle\FrameworkBundle\Controller\TemplateController
+    defaults:
+        # the path of the template to render
+        template:  'front_office/static/privacy.html.twig'
