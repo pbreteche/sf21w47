@@ -4,7 +4,18 @@
 
 {% block content %}
     <h1>{{ title }}</h1>
-    <p>Il y a {{ posts | length }} article(s) :</p>
+    <form>
+        <div>
+            <label for="author-filter">Auteur</label><select name="author" id="author-filter">
+                <option value="" {% if selected_author is null %}selected{% endif %}>Choisissez un auteur</option>
+                {% for author in authors %}
+                    <option {% if author is same as(selected_author) %}selected{% endif %}>{{ author.name }}</option>
+                {% endfor %}
+            </select>
+            <button>Filtrer</button>
+        </div>
+    </form>
+    <p>Il y a {{ posts | length }} article(s) de {{ selected_author ? selected_author.name : 'tous les auteurs' }} :</p>
     <ul>
         {% for post in posts %}
         <li>{{ post.createdAt | date('d/m/Y') }} - <a href="{{ path('app_frontoffice_default_show', {slug: post.slug}) }}">{{ post.title }}</a></li>

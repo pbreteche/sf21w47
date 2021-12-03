@@ -7,14 +7,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Serializer\SerializerInterface;
 
 class PostController extends AbstractController
 {
     /**
      * @Route("")
      */
-    public function last5(PostRepository $repository, SerializerInterface $serializer): JsonResponse
+    public function last5(PostRepository $repository): JsonResponse
     {
         $posts = $repository->findBy([], ['createdAt' => 'DESC'], 5);
 
