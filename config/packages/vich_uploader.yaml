@@ -5,3 +5,4 @@ vich_uploader:
         posts:
             uri_prefix: /images/posts
             upload_destination: '%kernel.project_dir%/public/images/posts'
+            namer: Vich\UploaderBundle\Naming\SmartUniqueNamer
