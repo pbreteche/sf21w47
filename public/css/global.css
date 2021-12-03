@@ -6,6 +6,10 @@
     color: inherit;
 }
 
+img, video, embed {
+    max-width: 100%;
+}
+
 body {
     color: #222;
     background-color: #FFFEFD;
@@ -17,4 +21,8 @@ body > footer
     padding: .5em;
     background-color: #123;
     color: #fed;
+}
+
+article.post img {
+    max-height: 10em;
 }
