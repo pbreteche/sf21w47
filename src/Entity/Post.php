@@ -6,11 +6,14 @@ use App\Repository\PostRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass=PostRepository::class)
  * @ORM\HasLifecycleCallbacks
+ * @Vich\Uploadable
  */
 class Post
 {
@@ -36,9 +39,28 @@ class Post
     private $body;
 
     /**
+     * NOTE: This is not a mapped field of entity metadata, just a simple property.
+     *
+     * @Vich\UploadableField(mapping="posts", fileNameProperty="posterName")
+     *
+     * @var File|null
+     */
+    private $posterFile;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $posterName;
+
+    /**
      * @ORM\Column(type="datetime_immutable")
      */
     private $createdAt;
+
+    /**
+     * @ORM\Column(type="datetime_immutable", nullable=true)
+     */
+    private $updatedAt;
 
     /**
      * @ORM\ManyToOne(targetEntity=User::class, fetch="EAGER")
@@ -84,6 +106,32 @@ class Post
         $this->body = $body;
 
         return $this;
+    }
+
+    public function setPosterFile(?File $posterFile = null): void
+    {
+        $this->posterFile = $posterFile;
+
+        if (null !== $posterFile) {
+            // It is required that at least one field changes if you are using doctrine
+            // otherwise the event listeners won't be called and the file is lost
+            $this->updatedAt = new \DateTimeImmutable();
+        }
+    }
+
+    public function getPosterFile(): ?File
+    {
+        return $this->posterFile;
+    }
+
+    public function setPosterName(?string $posterName): void
+    {
+        $this->posterName = $posterName;
+    }
+
+    public function getPosterName(): ?string
+    {
+        return $this->posterName;
     }
 
     public function getCreatedAt(): ?\DateTimeImmutable

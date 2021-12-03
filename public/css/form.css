@@ -3,3 +3,7 @@
     font-style: italic;
     color: #555;
 }
+
+.vich-image img {
+    max-height: 2em;
+}
