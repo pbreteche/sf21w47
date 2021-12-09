@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Post;
 use App\Form\PostType;
 use App\Repository\PostRepository;
+use App\Service\DemoService;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,8 +22,11 @@ class PostController extends AbstractController
     /**
      * @Route("/", methods="GET")
      */
-    public function homepage(PostRepository $repository): Response
-    {
+    public function homepage(
+        PostRepository $repository,
+        DemoService $demoService
+    ): Response {
+        $demoService->welcome();
         $posts = $repository->findBy([], ['createdAt' => 'DESC'], self::MAX_POSTS_PER_PAGE);
 
         return $this->render('post/homepage.html.twig', [
