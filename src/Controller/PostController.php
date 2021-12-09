@@ -6,6 +6,7 @@ use App\Entity\Post;
 use App\Form\PostType;
 use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
@@ -42,10 +43,12 @@ class PostController extends AbstractController
 
     /**
      * @Route("/new", methods={"GET", "POST"})
+     * @IsGranted("ROLE_USER")
      */
     public function create(Request $request, EntityManagerInterface $manager): Response
     {
         $post = new Post();
+        $post->setWrittenBy($this->getUser());
         $form = $this->createForm(PostType::class, $post);
         $form->handleRequest($request);
 
