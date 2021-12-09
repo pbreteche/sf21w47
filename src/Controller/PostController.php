@@ -7,6 +7,7 @@ use App\Form\PostType;
 use App\Repository\PostRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
@@ -67,6 +68,7 @@ class PostController extends AbstractController
 
     /**
      * @Route("/{id}/edit", methods={"GET", "PUT"})
+     * @Security("post.getWrittenBy() == user")
      */
     public function edit(Post $post, Request $request, EntityManagerInterface $manager): Response
     {
