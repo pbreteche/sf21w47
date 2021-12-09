@@ -38,6 +38,12 @@ class Post
      */
     private $createdAt;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=User::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $writtenBy;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -80,5 +86,17 @@ class Post
         if (!$this->createdAt) {
             $this->createdAt = new \DateTimeImmutable();
         }
+    }
+
+    public function getWrittenBy(): ?User
+    {
+        return $this->writtenBy;
+    }
+
+    public function setWrittenBy(?User $writtenBy): self
+    {
+        $this->writtenBy = $writtenBy;
+
+        return $this;
     }
 }
