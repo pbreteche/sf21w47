@@ -71,6 +71,12 @@ class PostController extends AbstractController
      */
     public function edit(Post $post, Request $request, EntityManagerInterface $manager): Response
     {
+        $this->denyAccessUnlessGranted('POST_EDIT', $post);
+
+        if (!$this->isGranted('POST_EDIT', $post)) {
+            throw $this->createAccessDeniedException();
+        }
+
         $form = $this->createForm(PostType::class, $post, [
             'method' => 'PUT',
         ]);
