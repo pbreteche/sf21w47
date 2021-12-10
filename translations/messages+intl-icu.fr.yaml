@@ -11,6 +11,10 @@ site:
     logout: Se déconnecter
     publish: Publier
     update: Modifier
+    select: Sélectionner
+  locale:
+    flash:
+      change: La langue a été changée
 
 post:
   name: Publication

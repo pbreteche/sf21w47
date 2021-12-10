@@ -26,6 +26,7 @@
         {% else %}
         Non-connecté, <a href="{{ path('app_security_login') }}">{{ 'site.action.login' | trans }}</a>
     {% endif %}
+        {{ render(controller('App\\Controller\\LocaleController::choiceList')) }}
     </div>
         {# read and display all flash messages #}
         {% for label, messages in app.flashes %}
