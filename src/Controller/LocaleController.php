@@ -32,8 +32,9 @@ class LocaleController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $request->getSession()->set('locale', $form->getData());
-            $this->addFlash('notice', $translator->trans('site.locale.flash.change'));
+            $newLocale = $form->getData();
+            $request->getSession()->set('_locale', $newLocale);
+            $this->addFlash('notice', $translator->trans('site.locale.flash.change', [], null, $newLocale));
         }
 
         return $this->redirectToRoute('app_post_homepage');

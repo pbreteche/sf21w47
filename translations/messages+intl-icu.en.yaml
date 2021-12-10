@@ -1,0 +1,24 @@
+site:
+  welcome: Welcome to my blog
+  nav:
+    back_to_homepage: 'Go back to homepage'
+  action:
+    delete: Delete
+    edit: Edit
+    login: Login
+    logout: Logout
+    publish: Publish
+    update: Update
+    select: Select
+  locale:
+    flash:
+      change: User locale changed
+
+post:
+  name: Post
+  count: >-
+    {count, plural,
+        =0    {There is no post:}
+        one   {There is one post:}
+        other {There are # posts:}
+    }
