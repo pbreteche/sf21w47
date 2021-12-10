@@ -15,11 +15,11 @@ class PostType extends AbstractType
     {
         $builder
             ->add('title', TextType::class, [
-                'help' => 'Pas plus long que 60 caractères',
+                'help' => 'post.fields.title.help',
             ])
             ->add('body', TextareaType::class, [
                 'attr' => [ 'cols' => 60, 'rows' => 10 ],
-                'help' => 'Écrivez un contenu suffisamment long (10).',
+                'help' => 'post.fields.body.help',
             ])
         ;
     }
@@ -28,6 +28,7 @@ class PostType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Post::class,
+            'label_format' => 'post.fields.%name%.label',
         ]);
     }
 }

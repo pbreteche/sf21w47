@@ -3,5 +3,5 @@
 {% block title %}Édition d'une publi{% endblock %}
 
 {% block body %}
-    {{ include('post/_form.html.twig', {form: edit_form, button_text: 'Modifier'}) }}
+    {{ include('post/_form.html.twig', {form: edit_form, button_text: 'site.action.update' | trans }) }}
 {% endblock %}

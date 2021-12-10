@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\EqualTo;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class PostController extends AbstractController
 {
@@ -49,7 +50,11 @@ class PostController extends AbstractController
      * @Route("/new", methods={"GET", "POST"})
      * @IsGranted("ROLE_USER")
      */
-    public function create(Request $request, EntityManagerInterface $manager): Response
+    public function create(
+        Request $request,
+        EntityManagerInterface $manager,
+        TranslatorInterface $translator
+    ): Response
     {
         $post = new Post();
         $post->setWrittenBy($this->getUser());
@@ -59,7 +64,7 @@ class PostController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $manager->persist($post);
             $manager->flush();
-            $this->addFlash('notice', 'Votre publication a bien été enregistrée');
+            $this->addFlash('notice', $translator->trans('post.flash.creation_success'));
 
             return $this->redirectToRoute('app_post_show', ['id' => $post->getId()], Response::HTTP_SEE_OTHER);
         }

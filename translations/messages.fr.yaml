@@ -1,0 +1,28 @@
+Welcome to my blog: Bienvenue sur mon blog
+
+site:
+  welcome: Bienvenue sur mon blog
+  nav:
+    back_to_homepage: 'Retour à l''accueil'
+  action:
+    delete: Supprimer
+    edit: Éditer
+    login: Se connecter
+    logout: Se déconnecter
+    publish: Publier
+    update: Modifier
+
+post:
+  name: Publication
+  count: 'Il y a %count% article(s) :'
+  fields:
+    title:
+      label: titre
+      help: Pas plus long que 60 caractères
+    body:
+      label: Corps
+      help: Écrivez un contenu suffisamment long (10).
+    createdAt:
+      label: 'Publié le'
+  flash:
+    creation_success: 'Votre publication a bien été enregistrée'

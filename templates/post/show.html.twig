@@ -4,13 +4,13 @@
 
 {% block body %}
 <h1>{{ post.title }}</h1>
-<p>Publié le: {{ post.createdAt | date('d/m/Y') }}</p>
+<p>{{ 'post.fields.createdAt.label' | trans }}: {{ post.createdAt | format_date('long') }}</p>
 <div class="post-body">
     {{ post.body | nl2br }}
 </div>
 <p>
-    <a href="{{ path('app_post_homepage') }}">Retour à l'accueil</a>
-    <a href="{{ path('app_post_edit', {id: post.id}) }}">Éditer</a>
-    <a href="{{ path('app_post_delete', {id: post.id}) }}">Supprimer</a>
+    <a href="{{ path('app_post_homepage') }}">{{ 'site.nav.back_to_homepage' | trans }}</a>
+    <a href="{{ path('app_post_edit', {id: post.id}) }}">{{ 'site.action.edit' | trans }}</a>
+    <a href="{{ path('app_post_delete', {id: post.id}) }}">{{ 'site.action.delete' | trans }}</a>
 </p>
 {% endblock %}

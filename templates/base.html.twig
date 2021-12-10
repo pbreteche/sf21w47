@@ -5,7 +5,7 @@
         <meta name="viewport"
               content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}{{ 'site.welcome' | trans }}{% endblock %}</title>
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
         {% block stylesheets %}
@@ -22,9 +22,9 @@
     <body>
     <div class="mb-3">
     {% if app.user %}
-        Connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_security_logout') }}">Se déconnecter</a>
+        Connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_security_logout') }}">{{ 'site.action.logout' | trans }}</a>
         {% else %}
-        Non-connecté, <a href="{{ path('app_security_login') }}">Se connecter</a>
+        Non-connecté, <a href="{{ path('app_security_login') }}">{{ 'site.action.login' | trans }}</a>
     {% endif %}
     </div>
         {# read and display all flash messages #}
