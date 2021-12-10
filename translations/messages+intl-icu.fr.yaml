@@ -14,7 +14,12 @@ site:
 
 post:
   name: Publication
-  count: 'Il y a %count% article(s) :'
+  count: >-
+    {count, plural,
+        =0    {Il n''y a pas d''articles :}
+        one   {Il y a un article :}
+        other {Il y a # articles :}
+    }
   fields:
     title:
       label: titre
@@ -24,5 +29,6 @@ post:
       help: Écrivez un contenu suffisamment long (10).
     createdAt:
       label: 'Publié le'
+      show: 'Publié le {value, date, medium}'
   flash:
     creation_success: 'Votre publication a bien été enregistrée'

@@ -4,7 +4,7 @@
 
 {% block body %}
     <h1>{{ title }}</h1>
-    <p>{{ 'post.count' | trans({'%count%': posts | length }) }}</p>
+    <p>{{ 'post.count' | trans({'count': posts | length }) }}</p>
     {% if is_granted('ROLE_USER') %}
         <p><a href="{{ path('app_post_create') }}">Nouveau</a></p>
     {% endif %}

@@ -4,7 +4,7 @@
 
 {% block body %}
 <h1>{{ post.title }}</h1>
-<p>{{ 'post.fields.createdAt.label' | trans }}: {{ post.createdAt | format_date('long') }}</p>
+<p>{{ 'post.fields.createdAt.show' | trans({value: post.createdAt}) }}</p>
 <div class="post-body">
     {{ post.body | nl2br }}
 </div>
