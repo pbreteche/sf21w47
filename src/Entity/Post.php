@@ -29,7 +29,7 @@ class Post
     /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank
-     * @Assert\Length(min=10)
+     * @Assert\Length(min=10, minMessage="post.body.length.min")
      */
     private $body;
 

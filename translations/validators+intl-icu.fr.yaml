@@ -1,0 +1,4 @@
+post:
+  body:
+    length:
+      min: Merci d''écrire d''avantage. Au moins {limit} caractères.
