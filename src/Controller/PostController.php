@@ -7,11 +7,13 @@ use App\Form\PostType;
 use App\Repository\PostRepository;
 use App\Service\DemoService;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Cache;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\EventListener\AbstractSessionListener;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\EqualTo;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -38,12 +40,28 @@ class PostController extends AbstractController
 
     /**
      * @Route("/{id}", requirements={"id": "\d+"}, methods="GET")
+     * @Cache(public=true, expires="tomorrow", maxage="3600", lastModified="post.getCreatedAt()")
      */
-    public function show(Post $post): Response
+    public function show(Post $post, Request $request): Response
     {
-        return $this->render('post/show.html.twig', [
+        $response = new Response();
+        $response->setEtag(md5($post->getBody()));
+        $response->setLastModified($post->getCreatedAt());
+
+        if ($response->isNotModified($request)) {
+            return $response;
+        }
+
+        $response = $this->render('post/show.html.twig', [
             'post' => $post,
-        ]);
+        ], $response);
+
+        //$response->headers->addCacheControlDirective('no-store');
+        //$response->headers->set('Cache-control', 'no-store');
+        $response->setExpires(new \DateTimeImmutable('first monday of next month midnight'));
+        $response->setPublic();
+
+        return $response;
     }
 
     /**
